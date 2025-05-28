@@ -1,0 +1,11 @@
+from node
+
+WORKDIR /app
+
+copy . . 
+
+expose 8080
+
+run npm run install
+
+cmd ["npm", "start"]

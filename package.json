@@ -19,6 +19,7 @@
     "mocha": "^11.4.0"
   },
   "scripts": {
+    "start": "node app.js",
     "test:e2e": "mocha Syed-Jay-E2E-Tests/*.js --timeout 5000",
     "cytest:e2e": "cypress open"
   }

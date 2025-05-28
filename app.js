@@ -17,6 +17,9 @@ const router = express.Router();
 const http = require('http');
 const socketIO = require('socket.io');
 
+// student route
+const studentRoute = require('./routes/studentRoute');
+
 app.use(session({
   secret: 'LaceVista@2025',
   resave: false,
@@ -79,7 +82,7 @@ app.use('/', pagesRoutes);
 app.use('/', orderRoutes);
 app.use('/api', chatBotRoutes);
 app.use('/', checkoutRoutes); // ✅ Mount the new checkout route
-
+app.use('/api/student', studentRoute);
 // Start server
 									  
 // const PORT = process.env.PORT || 3000;

@@ -4,6 +4,52 @@
 
 ---
 
+## Running the App with Docker & MongoDB Atlas
+This project is Dockerized and connects to MongoDB Atlas using an environment variable.
+
+## 🧩 Prerequisites
+- Docker installed
+
+- A .env file in the root of the project with your MongoDB Atlas URI (optional)
+
+1. Create a .env File (optional if you don't want to run database)
+Create a .env file in the root of your project and add the following:
+
+MONGO_URI="your mongo uri"
+
+ 2. Build the Docker Image
+
+ docker build -t lacevista-app .
+
+ 3. Run the Docker Container with Env File
+
+ docker run --env-file .env -p 3000:3000 lacevista-app
+
+- env-file .env loads environment variables like MONGO_URI
+
+- p 3000:3000 maps the container port to your local machine
+
+ 4. Access the App
+Once the container is running, open your browser:
+
+http://localhost:3000
+
+5. Check the /api/student Route You can test the API route using a browser or a tool like Postman:
+
+GET http://localhost:3000/api/student
+
+✅ Expected Output:
+
+{ "name": "Syed Muzzammil Hassan Abedi", "studentId": "225039695" }
+
+6. Stop the Container
+
+docker ps        # Get container ID
+docker stop <container_id>
+
+
+
+
 ## 🚀 Features
 
 ### 🖥️ Frontend (EJS + Materialize)

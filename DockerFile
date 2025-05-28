@@ -1,11 +1,11 @@
-from node
+FROM node
 
 WORKDIR /app
 
-copy . . 
+COPY . . 
 
-expose 8080
+EXPOSE 8080
 
-run npm run install
+RUN npm run install
 
-cmd ["npm", "start"]
+CMD ["npm", "start"]

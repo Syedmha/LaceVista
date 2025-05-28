@@ -1,3 +1,5 @@
+
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -41,7 +43,7 @@ app.set(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/LaceVista', {
+mongoose.connect(process.env.MONGO_URI ||'mongodb://localhost:27017/LaceVista', {
 }).then(() => console.log('MongoDB Connected'))
   .catch(err => console.error(err));
 
@@ -96,5 +98,11 @@ const io = socketIO(server); // attach socket.io
 
 // Make io available to routes/controllers
 app.set('io', io);
-
-server.listen(3000, () => console.log('Socket Server running on port 3000'));
+if (process.env.NODE_ENV !== 'test') {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+  });
+}
+// At bottom of app.js
+module.exports = app;

@@ -77,6 +77,7 @@ app.use('/', shopRoutes);
 app.use('/', cartRoutes);
 app.use('/', pagesRoutes);
 app.use('/', orderRoutes);
+app.use('/api', chatBotRoutes);
 app.use('/', checkoutRoutes); // ✅ Mount the new checkout route
 
 // Start server

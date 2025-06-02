@@ -60,8 +60,12 @@ exports.loginUser = async (req, res) => {
   try {
    
     const userFind = await User.findOne({ email });
-    
-    if (userFind && userFind.password === password) {
+
+    // Assume you got these from login form and DB
+    const hashedPasswordFromDB = userFind.password; // from MongoDB
+    const isMatch = await bcrypt.compare(password, hashedPasswordFromDB);
+
+    if (userFind && isMatch) {
       
       req.session.user = userFind;
       req.session.userId = userFind._id;
@@ -71,7 +75,7 @@ exports.loginUser = async (req, res) => {
         res.redirect('/admin/products');
        
       }
-      else if(userFind.role = "customer"){
+      else if(userFind.role == "customer"){
         res.redirect('/shop'); // Redirect to shop or home page
       }
     } else {
@@ -85,12 +89,10 @@ exports.loginUser = async (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
-  const { first_name, last_name, email, mobile, password, otp } = req.body;
+  const { first_name, last_name, email, mobile, password } = req.body;
 
-  if (!first_name || !last_name || !email || !mobile || !password || !otp)
-    return res.status(400).send('All fields including OTP are required');
-
- 
+  if (!first_name || !last_name || !email || !mobile || !password)
+    return res.status(400).send('All fields are required');
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10); // salt rounds = 10
@@ -105,8 +107,8 @@ exports.createUser = async (req, res) => {
 
     await newUser.save();
 
-    req.session.otp = null;
-    req.session.emailForOtp = null;
+    // req.session.otp = null;
+    // req.session.emailForOtp = null;
 
     res.render('login', {
       title: 'Login',

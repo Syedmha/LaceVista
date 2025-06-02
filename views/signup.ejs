@@ -22,10 +22,7 @@
       </div>
 
       
-      <div class="input-field">
-        <input id="otp" type="text" name="otp" >
-        <label for="otp">Enter OTP (Email)</label>
-      </div>
+   
 
       <div class="input-field">
         <input id="mobile" type="tel" name="mobile" required>
@@ -45,7 +42,7 @@
 </div>
 
 <script>
-document.getElementById("email").addEventListener("blur", () => {
+<!-- document.getElementById("email").addEventListener("blur", () => {
   const email = document.getElementById("email").value;
   if (email) {
     fetch('/send-otp', {
@@ -56,7 +53,7 @@ document.getElementById("email").addEventListener("blur", () => {
       .then(msg => alert(msg))
       .catch(err => alert('Error sending OTP'));
   }
-});
+}); -->
 </script>
 
 <%- include('footer') %>

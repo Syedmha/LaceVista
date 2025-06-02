@@ -43,7 +43,7 @@ app.set(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI ||'mongodb://localhost:27017/LaceVista', {
+mongoose.connect(process.env.MONGO_URI, {
 }).then(() => console.log('MongoDB Connected'))
   .catch(err => console.error(err));
 
